@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Nishit Bhavsar — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="noise"></div>
+<div id="scroll-prog"></div>
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mob-menu">
+  <a href="#hero" onclick="closeMob()">Home</a>
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#skills" onclick="closeMob()">Skills</a>
+  <a href="#projects" onclick="closeMob()">Projects</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">NB.</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-mesh">
+    <div class="mesh-circle mc1"></div>
+    <div class="mesh-circle mc2"></div>
+    <div class="mesh-circle mc3"></div>
+  </div>
+
+  <div class="hero-left">
+    <div class="hero-tag" id="h-tag">
+      <span class="dot"></span>
+      Available for internships
+    </div>
+
+    <h1 class="hero-name">
+      <span class="word" id="hw1">Nishit</span>
+      <span class="word" id="hw2">Bhavsar</span>
+    </h1>
+
+    <div class="hero-role" id="h-role">Full Stack Developer</div>
+
+    <p class="hero-desc" id="h-desc">
+      Enthusiastic BCA student from Ahmedabad passionate about building
+      efficient, beautiful digital solutions. I combine modern tech with
+      practical problem-solving to deliver delightful experiences.
+    </p>
+
+    <div class="hero-btns" id="h-btns">
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Me</button>
+      <a href="https://nishit0209.vercel.app/images/nishit_cv.pdf" target="_blank" class="btn-secondary">Download CV</a>
+    </div>
+
+    <div class="hero-stats" id="h-stats">
+      <div>
+        <div class="hstat-num">2+</div>
+        <div class="hstat-label">Projects Done</div>
+      </div>
+      <div>
+        <div class="hstat-num">BCA</div>
+        <div class="hstat-label">Student</div>
+      </div>
+      <div>
+        <div class="hstat-num">10+</div>
+        <div class="hstat-label">Skills</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right" id="h-right">
+    <div class="avatar-scene" id="avatar-scene">
+      <div class="avatar-glow-ring"></div>
+      <div class="avatar-glow-ring"></div>
+      <div class="avatar-glow-ring"></div>
+
+      <div class="avatar-card" id="avatar-card">
+        <div class="avatar-img-wrap">
+          <img src="https://nishit0209.vercel.app/images/profile.jpg"
+               alt="Nishit Bhavsar"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="avatar-fallback" style="display:none">NB</div>
+        </div>
+        <div class="avatar-name">Nishit Bhavsar</div>
+        <div class="avatar-role-tag">Full Stack Dev · BCA</div>
+        <div class="avatar-chips">
+          <span class="chip">Python</span>
+          <span class="chip">Django</span>
+          <span class="chip">PHP</span>
+          <span class="chip">MySQL</span>
+        </div>
+      </div>
+
+      <div class="float-badge fb1"><div class="badge-dot bd-g"></div><span>Open to work</span></div>
+      <div class="float-badge fb2"><div class="badge-dot bd-p"></div><span>BCA Student</span></div>
+      <div class="float-badge fb3"><div class="badge-dot bd-b"></div><span>Ahmedabad</span></div>
+    </div>
+  </div>
+
+  <div class="scroll-ind">
+    <div class="scroll-mouse"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ═══════════════════ ABOUT ═══════════════════ -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-left">
+      <div class="section-chip panel-3d">About me</div>
+      <h2 class="section-title panel-3d">Who am I <span>really?</span></h2>
+      <p class="section-desc panel-3d">
+        I'm a dedicated BCA student with expertise in full-stack web development.
+        I love building clean, responsive products that feel great to use — combining
+        modern tech with practical problem solving.
+      </p>
+      <div class="about-info-list panel-3d">
+        <div class="info-row"><div class="info-key">Name</div><div class="info-val">Nishit Bhavsar</div></div>
+        <div class="info-row"><div class="info-key">Email</div><div class="info-val">nishitbhavsar296@gmail.com</div></div>
+        <div class="info-row"><div class="info-key">Phone</div><div class="info-val">+91 8141229229</div></div>
+        <div class="info-row"><div class="info-key">Location</div><div class="info-val">Ahmedabad, Gujarat</div></div>
+        <div class="info-row"><div class="info-key">Degree</div><div class="info-val">BCA — Computer Applications</div></div>
+        <div class="info-row"><div class="info-key">Status</div><div class="info-val" style="color:#22c55e">✦ Available for internships</div></div>
+      </div>
+      <div style="margin-top:1.5rem">
+        <a href="https://nishit0209.vercel.app/images/nishit_cv.pdf" target="_blank" class="btn-primary" style="display:inline-block;padding:12px 28px;font-size:14px">Download Resume</a>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="about-card"><div class="ac-icon">🎯</div><div class="ac-title">Problem Solver</div><div class="ac-desc">I break complex challenges into simple, elegant solutions using modern web technologies.</div></div>
+      <div class="about-card"><div class="ac-icon">💻</div><div class="ac-title">Full Stack Dev</div><div class="ac-desc">From pixel-perfect frontends to robust Django + PHP backends — I build the full picture.</div></div>
+      <div class="about-card"><div class="ac-icon">🚀</div><div class="ac-title">Always Learning</div><div class="ac-desc">Constantly upskilling — currently deep into Django REST APIs, AI tools, and modern JS.</div></div>
+      <div class="about-card"><div class="ac-icon">🤝</div><div class="ac-title">Team Player</div><div class="ac-desc">Open to internships and collaborations. Let's build something impactful together.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ SKILLS ═══════════════════ -->
+<section id="skills">
+  <div class="section-chip panel-3d">What I know</div>
+  <h2 class="section-title panel-3d">My <span>Tech Stack</span></h2>
+  <p class="section-desc panel-3d">Technologies I use to bring ideas to life, from frontend polish to backend power.</p>
+  <div class="skills-grid">
+    <div class="skill-group"><div class="sg-icon">🎨</div><div class="sg-title">Frontend</div><div class="skill-tags"><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Bootstrap</span><span class="skill-tag">Responsive Design</span></div></div>
+    <div class="skill-group"><div class="sg-icon">⚙️</div><div class="sg-title">Backend</div><div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">Django</span><span class="skill-tag">PHP</span><span class="skill-tag">MySQL</span><span class="skill-tag">REST APIs</span></div></div>
+    <div class="skill-group"><div class="sg-icon">🛠️</div><div class="sg-title">Tools</div><div class="skill-tags"><span class="skill-tag">Git</span><span class="skill-tag">VS Code</span><span class="skill-tag">Cursor AI</span><span class="skill-tag">AI Tools</span><span class="skill-tag">Vercel</span></div></div>
+  </div>
+</section>
+
+<!-- ═══════════════════ PROJECTS ═══════════════════ -->
+<section id="projects">
+  <div class="section-chip panel-3d">My work</div>
+  <h2 class="section-title panel-3d">Featured <span>Projects</span></h2>
+  <p class="section-desc panel-3d">Real projects built with real tech — each one solving a real problem.</p>
+  <div class="proj-grid">
+    <div class="proj-card">
+      <div class="proj-img">
+        <img src="https://nishit0209.vercel.app/images/lr.jpg" alt="Furniture System" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="proj-img-placeholder" style="display:none">🛋️</div>
+        <div class="proj-overlay">
+          <div class="proj-links">
+            <a href="https://github.com/nishit0209/online_furniture" target="_blank" class="proj-link">GitHub →</a>
+            <a href="#" class="proj-link">Live</a>
+          </div>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags"><span class="ptag">PHP</span><span class="ptag">MySQL</span><span class="ptag">HTML/CSS</span></div>
+        <div class="proj-title">Online Furniture Management System</div>
+        <div class="proj-desc">Complete e-commerce solution with catalog, cart, accounts, and inventory dashboard.</div>
+        <ul class="proj-features"><li>E-commerce platform with product, cart & admin dashboard</li><li>Secure auth + role-based access control</li><li>Responsive UI across all devices</li><li>MySQL for persistent storage</li></ul>
+      </div>
+    </div>
+    <div class="proj-card">
+      <div class="proj-img">
+        <img src="https://nishit0209.vercel.app/images/plan3.jpg" alt="Gym System" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="proj-img-placeholder" style="display:none">💪</div>
+        <div class="proj-overlay">
+          <div class="proj-links">
+            <a href="#" class="proj-link">GitHub →</a>
+            <a href="#" class="proj-link">Live</a>
+          </div>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-tags"><span class="ptag">PHP</span><span class="ptag">MySQL</span><span class="ptag">JavaScript</span></div>
+        <div class="proj-title">Gym Management System</div>
+        <div class="proj-desc">Member tracking, attendance, workout plans, and payment processing for gyms.</div>
+        <ul class="proj-features"><li>Member tracking, attendance & payments</li><li>Interfaces for staff and members</li><li>Stats & revenue reports dashboard</li><li>Secure data handling</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════ CONTACT ═══════════════════ -->
+<section id="contact">
+  <div class="section-chip panel-3d">Get in touch</div>
+  <h2 class="section-title panel-3d">Let's <span>Build Together</span></h2>
+  <p class="section-desc panel-3d">Open to internships and collaborations. Let's build something great!</p>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="ci-card"><div class="ci-icon">📧</div><div><div class="ci-label">Email</div><div class="ci-val">nishitbhavsar296@gmail.com</div></div></div>
+      <div class="ci-card"><div class="ci-icon">📱</div><div><div class="ci-label">Phone</div><div class="ci-val">+91 8141229229</div></div></div>
+      <div class="ci-card"><div class="ci-icon">📍</div><div><div class="ci-label">Location</div><div class="ci-val">Ahmedabad, Gujarat, India</div></div></div>
+      <div class="ci-card"><div class="ci-icon">💼</div><div><div class="ci-label">Status</div><div class="ci-val" style="color:#22c55e">Available for Internships</div></div></div>
+      <div class="ci-card"><div class="ci-icon">🐙</div><div><div class="ci-label">GitHub</div><div class="ci-val"><a href="https://github.com/nishit0209" target="_blank" style="color:var(--purple)">github.com/nishit0209</a></div></div></div>
+    </div>
+    <!-- Formspree integration -->
+    <form class="contact-form" id="fs-form" action="https://formspree.io/f/mrbpnqej" method="POST">
+      <div class="form-group"><label class="form-label">Your Name</label><input type="text" name="name" class="form-input" placeholder="John Doe" required></div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" name="email" class="form-input" placeholder="john@example.com" required></div>
+      <div class="form-group"><label class="form-label">Subject</label><input type="text" name="subject" class="form-input" placeholder="Internship Opportunity"></div>
+      <div class="form-group"><label class="form-label">Message</label><textarea name="message" class="form-textarea" placeholder="Tell me about the opportunity..." required></textarea></div>
+      <button type="submit" class="form-submit">Send Message →</button>
+      <div id="form-status" style="margin-top:.8rem;font-size:13px;text-align:center;"></div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-copy">© 2025 Nishit Bhavsar. All Rights Reserved.</div>
+  <div class="footer-links">
+    <a href="#hero">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/SplitText.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
