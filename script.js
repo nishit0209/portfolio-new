@@ -1,27 +1,33 @@
 gsap.registerPlugin(ScrollTrigger);
 
-// Cursor only for desktop (pointer fine)
-if(window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+// Check if device is mobile (touch screen)
+const isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+
+// Cursor only for desktop (non-touch devices)
+if(!isMobile && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
   const cur = document.getElementById('cur');
   const ring = document.getElementById('cur-ring');
   let mx=0,my=0,rx=0,ry=0;
   document.addEventListener('mousemove', e=>{mx=e.clientX;my=e.clientY});
   (function animCur(){
-    rx+=(mx-rx)*.1; ry+=(my-ry)*.1;
+    rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1;
     if(cur) cur.style.left=mx+'px'; if(cur) cur.style.top=my+'px';
     if(ring) ring.style.left=rx+'px'; if(ring) ring.style.top=ry+'px';
     requestAnimationFrame(animCur);
   })();
 } else {
-  const curDiv = document.getElementById('cur'); if(curDiv) curDiv.style.display='none';
-  const ringDiv = document.getElementById('cur-ring'); if(ringDiv) ringDiv.style.display='none';
+  // Hide cursor elements on mobile
+  const curDiv = document.getElementById('cur'); 
+  const ringDiv = document.getElementById('cur-ring');
+  if(curDiv) curDiv.style.display = 'none';
+  if(ringDiv) ringDiv.style.display = 'none';
 }
 
 // Scroll progress bar
 const prog = document.getElementById('scroll-prog');
 window.addEventListener('scroll',()=>{ 
   const p = window.scrollY/(document.body.scrollHeight-window.innerHeight); 
-  prog.style.transform = `scaleX(${p})`; 
+  if(prog) prog.style.transform = `scaleX(${p})`; 
 });
 
 // Nav on scroll
@@ -36,51 +42,68 @@ ScrollTrigger.create({
 let mobOpen=false;
 function toggleMob(){ 
   mobOpen=!mobOpen; 
-  document.getElementById('mob-menu').classList.toggle('open',mobOpen); 
+  const mobMenu = document.getElementById('mob-menu');
+  if(mobMenu) mobMenu.classList.toggle('open',mobOpen); 
   const h=document.getElementById('hamburger'); 
-  const spans=h.querySelectorAll('span'); 
-  if(mobOpen){ 
-    gsap.to(spans[0],{rotate:45,y:6.5,duration:.3}); 
-    gsap.to(spans[1],{opacity:0,duration:.2}); 
-    gsap.to(spans[2],{rotate:-45,y:-6.5,duration:.3}); 
-  }else{ 
-    gsap.to(spans,{rotate:0,y:0,opacity:1,duration:.3}); 
-  } 
+  if(h){
+    const spans=h.querySelectorAll('span'); 
+    if(mobOpen){ 
+      gsap.to(spans[0],{rotate:45,y:6.5,duration:.3}); 
+      gsap.to(spans[1],{opacity:0,duration:.2}); 
+      gsap.to(spans[2],{rotate:-45,y:-6.5,duration:.3}); 
+    }else{ 
+      gsap.to(spans,{rotate:0,y:0,opacity:1,duration:.3}); 
+    }
+  }
 }
 function closeMob(){ if(mobOpen) toggleMob(); }
 
-// Split name into chars for hero animation
-function splitChars(el){ 
-  const text=el.textContent; 
-  el.innerHTML=''; 
-  [...text].forEach(c=>{ 
-    const s=document.createElement('span'); 
-    s.className='char'; 
-    s.textContent=c===' '?'\u00a0':c; 
-    el.appendChild(s); 
-  }); 
-  return el.querySelectorAll('.char'); 
+// Hero name animation - using simple fade in for mobile, full animation for desktop
+const heroName = document.getElementById('hero-name');
+if(!isMobile){
+  // Desktop: split text animation
+  function splitChars(container){
+    const words = container.querySelectorAll('.word');
+    words.forEach(word => {
+      const text = word.textContent;
+      word.innerHTML = '';
+      [...text].forEach(c => {
+        const s = document.createElement('span');
+        s.className = 'char';
+        s.textContent = c === ' ' ? '\u00a0' : c;
+        word.appendChild(s);
+      });
+    });
+    return container.querySelectorAll('.char');
+  }
+  
+  const allChars = splitChars(heroName);
+  const heroTl = gsap.timeline({delay:0.2});
+  heroTl
+    .from('#h-tag',{y:20,opacity:0,duration:.6})
+    .from(allChars,{y:80,opacity:0,rotationX:-60,duration:.7,stagger:.03,ease:'back.out(1.6)'}, '-=.2')
+    .from('#h-role',{y:20,opacity:0,duration:.6}, '-=.3')
+    .from('#h-desc',{y:20,opacity:0,duration:.6}, '-=.4')
+    .from('#h-btns',{y:20,opacity:0,duration:.6}, '-=.4')
+    .from('#h-stats > div',{y:20,opacity:0,duration:.5,stagger:.1}, '-=.3')
+    .from('#h-right',{x:60,opacity:0,duration:.9,ease:'power2.out'}, '-=.8');
+} else {
+  // Mobile: simple fade in animation
+  const heroTl = gsap.timeline({delay:0.2});
+  heroTl
+    .from('#h-tag',{y:20,opacity:0,duration:.6})
+    .from('#hero-name',{y:30,opacity:0,duration:.6}, '-=.2')
+    .from('#h-role',{y:20,opacity:0,duration:.6}, '-=.3')
+    .from('#h-desc',{y:20,opacity:0,duration:.6}, '-=.4')
+    .from('#h-btns',{y:20,opacity:0,duration:.6}, '-=.4')
+    .from('#h-stats > div',{y:20,opacity:0,duration:.5,stagger:.1}, '-=.3')
+    .from('#h-right',{x:60,opacity:0,duration:.9,ease:'power2.out'}, '-=.8');
 }
 
-const chars1=splitChars(document.getElementById('hw1')); 
-const chars2=splitChars(document.getElementById('hw2'));
-
-// Hero timeline animation
-const heroTl = gsap.timeline({delay:.2});
-heroTl
-  .from('#h-tag',{y:20,opacity:0,duration:.6})
-  .from(chars1,{y:80,opacity:0,rotationX:-60,duration:.7,stagger:.05,ease:'back.out(1.6)'}, '-=.2')
-  .from(chars2,{y:80,opacity:0,rotationX:-60,duration:.7,stagger:.05,ease:'back.out(1.6)'}, '-=.5')
-  .from('#h-role',{y:20,opacity:0,duration:.6}, '-=.3')
-  .from('#h-desc',{y:20,opacity:0,duration:.6}, '-=.4')
-  .from('#h-btns',{y:20,opacity:0,duration:.6}, '-=.4')
-  .from('#h-stats > div',{y:20,opacity:0,duration:.5,stagger:.1}, '-=.3')
-  .from('#h-right',{x:60,opacity:0,duration:.9,ease:'power2.out'}, '-=.8');
-
-// 3D avatar tilt on mouse (desktop only)
+// 3D avatar tilt - only on desktop
 const scene = document.getElementById('avatar-scene'); 
 const card = document.getElementById('avatar-card');
-if(scene && card && window.matchMedia("(hover: hover) and (pointer: fine)").matches){
+if(scene && card && !isMobile && window.matchMedia("(hover: hover) and (pointer: fine)").matches){
   document.addEventListener('mousemove', e=>{ 
     const r=scene.getBoundingClientRect(); 
     const cx=r.left+r.width/2, cy=r.top+r.height/2; 
@@ -128,24 +151,32 @@ const statusDiv = document.getElementById('form-status');
 if(form){
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    statusDiv.style.color = '#8b5cf6';
-    statusDiv.textContent = 'Sending...';
+    if(statusDiv){
+      statusDiv.style.color = '#8b5cf6';
+      statusDiv.textContent = 'Sending...';
+    }
     const formData = new FormData(form);
     try {
       const response = await fetch(form.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
       if(response.ok) {
-        statusDiv.style.color = '#4ade80';
-        statusDiv.textContent = '✓ Message sent successfully! I\'ll get back soon.';
+        if(statusDiv){
+          statusDiv.style.color = '#4ade80';
+          statusDiv.textContent = '✓ Message sent successfully! I\'ll get back soon.';
+        }
         form.reset();
       } else {
-        statusDiv.style.color = '#f87171';
-        statusDiv.textContent = '❌ Oops! Something went wrong. Please try again.';
+        if(statusDiv){
+          statusDiv.style.color = '#f87171';
+          statusDiv.textContent = '❌ Oops! Something went wrong. Please try again.';
+        }
       }
     } catch(err) {
-      statusDiv.style.color = '#f87171';
-      statusDiv.textContent = '❌ Network error. Check your connection.';
+      if(statusDiv){
+        statusDiv.style.color = '#f87171';
+        statusDiv.textContent = '❌ Network error. Check your connection.';
+      }
     }
-    setTimeout(()=>{ statusDiv.textContent = ''; }, 5000);
+    setTimeout(()=>{ if(statusDiv) statusDiv.textContent = ''; }, 5000);
   });
 }
 

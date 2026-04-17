@@ -28,11 +28,17 @@ body{
   margin:0;
   padding:0;
 }
-/* Only desktop custom cursor */
+/* Desktop cursor only - hidden completely on mobile */
 @media (hover: hover) and (pointer: fine) {
   body{cursor:none;}
   a, button, .nav-links a, .btn-primary, .btn-secondary, .nav-cta, .proj-link, .form-submit, .hamburger {
     cursor: none;
+  }
+}
+/* Mobile devices - ensure normal cursor */
+@media (hover: none) and (pointer: coarse) {
+  body, a, button, .nav-links a, .btn-primary, .btn-secondary, .nav-cta, .proj-link, .form-submit, .hamburger {
+    cursor: auto !important;
   }
 }
 a{text-decoration:none;color:inherit;}
@@ -57,6 +63,12 @@ img{max-width:100%}
     z-index:99998;transform:translate(-50%,-50%);
   }
   body:has(a:hover) #cur,body:has(button:hover) #cur{width:18px;height:18px}
+}
+/* Hide cursor elements on mobile completely */
+@media (hover: none) and (pointer: coarse) {
+  #cur, #cur-ring {
+    display: none !important;
+  }
 }
 
 /* ═══════════════════ NOISE ═══════════════════ */
@@ -166,22 +178,17 @@ nav.scrolled{
   font-family:'Syne',sans-serif;
   font-size:clamp(2.8rem,6vw,5.5rem);
   font-weight:800;
-  line-height:1.1;
+  line-height:1.2;
   margin-bottom:0.6rem;
   overflow:visible;
   display:block;
 }
 .hero-name .word{
   display:inline-block;
-  overflow:visible;
-  white-space:nowrap;
+  margin-right:0.15em;
 }
 .hero-name .char{
   display:inline-block;
-  white-space:normal;
-}
-.hero-name br{
-  display:none;
 }
 
 .hero-role{
@@ -234,7 +241,8 @@ nav.scrolled{
 }
 .avatar-scene{
   width:380px;height:420px;
-  perspective:800px;position:relative;
+  perspective:800px;
+  position:relative;
 }
 .avatar-card{
   width:100%;height:100%;
@@ -242,9 +250,24 @@ nav.scrolled{
   border-radius:24px;
   background:linear-gradient(135deg,rgba(139,92,246,.15),rgba(236,72,153,.08),rgba(6,182,212,.1));
   border:1px solid rgba(139,92,246,.25);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:2rem;position:relative;overflow:hidden;
-  transition:transform .1s ease-out;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+  position:relative;
+  overflow:hidden;
+  transition:transform 0.3s ease-out;
+}
+/* Mobile: keep avatar card static but visible */
+@media (hover: none) and (pointer: coarse) {
+  .avatar-card {
+    transform: none !important;
+    transition: none !important;
+  }
+  .avatar-scene {
+    perspective: none;
+  }
 }
 .avatar-card::before{
   content:'';position:absolute;inset:0;
@@ -584,12 +607,10 @@ footer{
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
   .skills-grid{grid-template-columns:1fr}
-  .hero-name{font-size:clamp(2.2rem,10vw,3.5rem)}
-  .hero-name .word{white-space:normal;}
-  .hero-name br{display:block;}
-  .hero-right .float-badge{display: none;}
+  .hero-name{font-size:clamp(2rem,8vw,3rem);}
+  .hero-name .word{display:inline-block;}
 }
 @media(max-width:480px){
   .hero-stats{flex-wrap:wrap;gap:1.5rem}
-  .hero-right .avatar-scene{transform:scale(0.9);}
+  .hero-right .avatar-scene{transform:scale(0.85); margin:-20px auto;}
 }
